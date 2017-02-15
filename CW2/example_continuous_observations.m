@@ -5,7 +5,7 @@ pi = [0.5; 0.5]; % inital probability pi_1 = 0.5 and pi_2 =0.5
 %%two states hence A is a 2X2 matrix 
 A  = [0.4 0.6 ; 0.4 0.6 ];         %p(y_t|y_{t-1})
 
-
+pi
 %%one dimensional Gaussians 
 
 E.mu    =[ .1  5]; %%the means of each of the Gaussians
