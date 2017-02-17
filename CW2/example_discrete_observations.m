@@ -14,11 +14,11 @@ E = [1/6 1/6 1/6 1/6 1/6 1/6;      %p(x_t|y_{t})
 
 %%Y is the set of generated observations 
 %%S is the set of ground truth sequence of latent vectors 
-pi_e = [0.5, 0.5];
+pi_e = reshape([0.5, 0.5],2,1);
 A_e = repmat(0.5,2,2);
 E_e = repmat(1/6, 2, 6);
 
-for iter = 1:20
+for iter = 1:100
 
   [E1, E3] =  EM_HMM_discrete_E(N, pi_e, A_e, E_e, Y);
  
@@ -26,4 +26,9 @@ for iter = 1:20
   E_e(2, 1:5) = bj;
   E_e(2,6) = 1-sum(bj);
   
+  pi_e = reshape(pi_e, 2, 1);
+  
 end
+  pi_e
+  A_e
+  E_e

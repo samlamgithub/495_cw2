@@ -1,4 +1,4 @@
-function [ beta ] = Smoothing(pi, A, E, Y, C)
+function [ beta ] = smoothing(pi, A, E, Y, C)
 
 K = size(pi, 1);
 T = size(Y, 2);
