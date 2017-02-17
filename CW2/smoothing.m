@@ -1,16 +1,14 @@
-function [ beta_zt ] = Smoothing(T, pi, A, E, Y, t)
+function [ beta ] = Smoothing(pi, A, E, Y, C)
 
-[Num_state, Num_obser] = size(E);
-T = Seq_Len = size(Y, 2);
+K = size(pi, 1);
+T = size(Y, 2);
 
-beta = zeros(Num_state, T-t);
-beta(:, T-t) = ones(Num_state, 1); % init beta zT
+beta = zeros(K, T);
+beta(:, T) = ones(K, 1); % init beta zT
 
-for k = T-1:t
-    beta(:, k) = beta(:,k+1)'*A*E(:, Y(k+1)); % iterate
-    beta(:,k) = beta(:,k)./sum(beta(:,k)); % renormalise
+for k = T-1:-1:1
+    beta(:, k) = A*(beta(:, k+1).*E(:, Y(k+1))); % iterate
+    beta(:, k) = beta(:, k)/C(k+1); % renormalise
 end
-
-return beta;
 
 end

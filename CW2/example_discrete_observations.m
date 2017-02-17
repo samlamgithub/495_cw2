@@ -16,14 +16,14 @@ E = [1/6 1/6 1/6 1/6 1/6 1/6;      %p(x_t|y_{t})
 %%S is the set of ground truth sequence of latent vectors 
 pi_e = [0.5, 0.5];
 A_e = repmat(0.5,2,2);
-E_e = repmat(1/12, 2, 6);
+E_e = repmat(1/6, 2, 6);
 
 for iter = 1:20
 
-[E_z1, E_ztl, E3] =  EM_HMM_discrete_E(N, T, pi_e, A_e, E_e, Y);
+  [E1, E3] =  EM_HMM_discrete_E(N, pi_e, A_e, E_e, Y);
  
-  [bj2, pi_e, A_e ] = EM_HMM_discrete_M(N, T, size(pi), size(E, 2), E_z1, E_ztl, E3, Y);
-  p = sum(bj2)/(size(E,2)-1);
-  pi_e = [1-p, p];
+  [bj, pi_e, A_e] = EM_HMM_discrete_M(N, T, size(pi, 1), size(E, 2), E1, E3, Y);
+  E_e(2, 1:5) = bj;
+  E_e(2,6) = 1-sum(bj);
   
 end

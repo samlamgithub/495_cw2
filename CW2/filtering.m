@@ -1,19 +1,17 @@
-function [ alpha_zt ] = Filtering(T, pi, A, E, Y, t)
+function [ alpha, C ] = Filtering(pi, A, E, Y)
 
-[Num_state, Num_obser] = size(E);
-Seq_Len = size(Y, 2);
+K = size(pi, 1);
+T = size(Y, 2);
+C = zeros(T);
+alpha = zeros(K, T);
+alpha(:, 1) = pi.* E(:, Y(1)); % init alpha z1
+C(1) = sum(alpha(:,1));
+alpha(:, 1) = alpha(:,1)/C(1)); % normalise to get posterior
 
-alpha = zeros(Num_state, t);
-for k = 1:Num_state
-    alpha(k, 1) = pi(k) * E(k, Y(1)); % init alpha z1
-end
-alpha(:,1) = alpha(:,1)./sum(alpha(:,1)); % normalise to get posterior
-    
-for k = 2:t
+for k = 2:T
     alpha(:, k) = E(:, Y(k)).*(A*alpha(:,k-1)); % iterate
-    alpha(:,k) = alpha(:,k)./sum(alpha(:,k)); % renormalise
+    C(k) = sum(alpha(:,k));
+    alpha(:,k) = alpha(:,k)./C(k); % renormalise
 end
-
-return alpha;
 
 end
