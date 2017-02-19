@@ -1,3 +1,6 @@
+clc;
+clear all;
+
 N  = 100;         % number of sequences
 T  = 100;        % length of the sequence
 pi = [0.5; 0.5]; % inital probability pi_1 = 0.5 and pi_2 =0.5
@@ -8,13 +11,31 @@ A  = [0.4 0.6 ; 0.4 0.6 ];         %p(y_t|y_{t-1})
 pi
 %%one dimensional Gaussians 
 
-E.mu    =[ .1  5]; %%the means of each of the Gaussians
+E.mu    =[ .1  .5]; %%the means of each of the Gaussians
 E.sigma2=[ .4 .8]; %%the variances
-   
-
 
 [ Y, S ] = HmmGenerateData(N, T, pi, A, E, 'normal'); 
-
 %%Y is the set of generated observations 
 %%S is the set of ground truth sequence of latent vectors 
 
+%10 x 100
+
+pi_e = reshape([0.5, 0.5],2,1);
+A_e = repmat(0.5,2,2);
+E_e.mu    =[ 1 , 1]; %%the means of each of the Gaussians
+E_e.sigma2=[ 1 , 1]; %%the variances
+
+for iter = 1:100
+  [E1, E3, sums] =  EM_HMM_continuous_E(N, pi_e, A_e, E_e, Y);
+%  sums
+  [E_e.mu, E_e.sigma2, pi_e, A_e] = EM_HMM_continuous_M(N, T, size(pi, 1), size(E, 2), E1, E3, Y, E_e);
+   reshape(E_e.mu, 1, 2);
+   reshape(E_e.sigma2, 1, 2);
+  pi_e = reshape(pi_e, 2, 1);
+  
+end
+
+pi_e
+A_e
+E_e.mu
+E_e.sigma2

@@ -1,19 +1,18 @@
-function [ E1, E3, sums ] = EM_HMM_discrete_E(N, pi, A, E, Y)
-  %        N x K,  N x T x K, N x T-1 x K x K
+function [ E1, E3, sums ] = EM_HMM_continuous_E(N, pi, A, E, Y)
+  %     N x T x K, N x T-1 x K x K, N x T-1
   
 T = size(Y, 2); % num seq
 K = size(pi, 1); % num latent state
-NumObsers = size(E, 2);
 
 alphas = zeros(N, T, K);
 betas = zeros(N, T, K);
 C = zeros(N, T);
 
 for n = 1:N
-    [an, cn] = filtering(pi, A, E, Y(n, :));
+    [an, cn] = continuous_filtering(pi, A, E, Y(n, :));
 	alphas(n, :, :) = an';
     C(n, :) = cn';
-	betas(n, :, :) = smoothing(pi, A, E, Y(n, :), C(n, :)')';
+	betas(n, :, :) = continuous_smoothing(pi, A, E, Y(n, :), C(n, :)')';
 end
 
 % p_total = sum(C, 2); % nx1
@@ -26,16 +25,10 @@ E1(:, :, :) = alphas(:, :, :).*betas(:, :, :);
 E3 = zeros(N, T-1, K, K);
 sums = zeros(N, T-1);
 for n = 1:N
-    
     for t = 2:T
         for j = 1:K
             for k = 1:K
-                p = 1;
-                for r = 1:NumObsers
-                    if Y(n, t) == r
-                         p = p * E(k, r);
-                    end
-                end
+                p = normpdf(Y(n, t), E.mu(k), E.sigma2(k));
                 E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) * C(n, t);              
             end
         end

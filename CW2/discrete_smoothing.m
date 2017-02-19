@@ -1,4 +1,4 @@
-function [ beta ] = smoothing(pi, A, E, Y, C)
+function [ beta ] = discrete_smoothing(pi, A, E, Y, C)
 %                         k x 1, k x k, k x 6, 1 x T, T x 1
 K = size(pi, 1);
 T = size(Y, 2);

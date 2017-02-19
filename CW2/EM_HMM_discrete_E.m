@@ -1,5 +1,5 @@
 function [ E1, E3, sums ] = EM_HMM_discrete_E(N, pi, A, E, Y)
-  %        N x K,  N x T x K, N x T-1 x K x K
+  %     N x T x K, N x T-1 x K x K, N x T-1
   
 T = size(Y, 2); % num seq
 K = size(pi, 1); % num latent state

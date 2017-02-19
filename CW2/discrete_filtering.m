@@ -1,4 +1,4 @@
-function [ alpha, C ] = filtering(pi, A, E, Y)
+function [ alpha, C ] = discrete_filtering(pi, A, E, Y)
 %                             k x 1, k x k, k x 6, 1 x T
 K = size(pi, 1);
 T = size(Y, 2);
