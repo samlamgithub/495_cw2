@@ -5,9 +5,7 @@ function [ b2, pi, a ] = EM_HMM_discrete_M(N, T, K, NumObsers, E1, E3, Y )
   for n = 1:N
     for t = 1:T
         for j = 1:NumObsers - 1
-            if Y(n, t) == j
-                b2(j) = b2(j) + E1(n, t, 2);
-            end 
+             b2(j) = b2(j) + E1(n, t, 2)* (Y(n, t) == j);
         end
     end
   end

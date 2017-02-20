@@ -21,6 +21,8 @@ pi_e = reshape([0.5, 0.5],2,1);
 A_e = repmat(0.5,2,2);
 E_e = repmat(1/6, 2, 6);
 
+K = size(A, 1);
+
 for iter = 1:1000
 
   [E1, E3, sums] =  EM_HMM_discrete_E(N, pi_e, A_e, E_e, Y);
@@ -30,12 +32,13 @@ for iter = 1:1000
   E_e(2,6) = 1-sum(bj);
   
   pi_e = reshape(pi_e, 2, 1);
-  A_e
+%   A_e
   
 end
+% 
+% pi_e
+% A_e
+% E_e
 
-pi_e
-A_e
-E_e
-
-S_e = EM_HMM_discrete_viterbi(N, T, pi_e, A_e, E_e);
+S_e = EM_HMM_discrete_viterbi(N, T, K, pi_e, A_e, E_e, Y);
+sum(sum(abs(S_e-S)))
