@@ -1,4 +1,4 @@
-function [ mu, sigma, pi, a ] = EM_HMM_continuous_M(N, T, K, NumObsers, E1, E3, Y, E_e )
+function [ mu, sigma, pi, a ] = EM_HMM_continuous_M(N, T, K, E1, E3, Y, E_e )
   %        kx2, kx2, k x 1, k x K        /   N x T xK,  N x T x K, N x T-1 x K x K, N x T
   
   mu = zeros(K, 1);

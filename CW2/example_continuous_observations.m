@@ -28,14 +28,15 @@ E_e.sigma2=[ 1 , 1]; %%the variances
 for iter = 1:100
   [E1, E3, sums] =  EM_HMM_continuous_E(N, pi_e, A_e, E_e, Y);
 %  sums
-  [E_e.mu, E_e.sigma2, pi_e, A_e] = EM_HMM_continuous_M(N, T, size(pi, 1), size(E, 2), E1, E3, Y, E_e);
+  [E_e.mu, E_e.sigma2, pi_e, A_e] = EM_HMM_continuous_M(N, T, size(pi, 1), E1, E3, Y, E_e);
    reshape(E_e.mu, 1, 2);
    reshape(E_e.sigma2, 1, 2);
   pi_e = reshape(pi_e, 2, 1);
   
-end
-
 pi_e
 A_e
 E_e.mu
 E_e.sigma2
+  
+end
+

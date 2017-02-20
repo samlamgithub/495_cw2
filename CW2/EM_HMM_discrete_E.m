@@ -10,10 +10,10 @@ betas = zeros(N, T, K);
 C = zeros(N, T);
 
 for n = 1:N
-    [an, cn] = filtering(pi, A, E, Y(n, :));
+    [an, cn] = discrete_filtering(pi, A, E, Y(n, :));
 	alphas(n, :, :) = an';
     C(n, :) = cn';
-	betas(n, :, :) = smoothing(pi, A, E, Y(n, :), C(n, :)')';
+	betas(n, :, :) = discrete_smoothing(pi, A, E, Y(n, :), C(n, :)')';
 end
 
 % p_total = sum(C, 2); % nx1
@@ -26,7 +26,6 @@ E1(:, :, :) = alphas(:, :, :).*betas(:, :, :);
 E3 = zeros(N, T-1, K, K);
 sums = zeros(N, T-1);
 for n = 1:N
-    
     for t = 2:T
         for j = 1:K
             for k = 1:K

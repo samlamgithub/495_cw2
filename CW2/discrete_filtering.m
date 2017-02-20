@@ -10,7 +10,7 @@ alpha(:, 1) = alpha(:,1)/C(1); % normalise to get posterior
 
 for t = 2:T
     %   k x 1       k x 1         k x k,  k x 1
-    alpha(:, t) = E(:, Y(t)).*(A*alpha(:,t-1)); % iterate
+    alpha(:, t) = E(:, Y(t)).*(A'*alpha(:,t-1)); % iterate
                 %  k x 1
     C(t) = sum(alpha(:,t));
     % k x 1          k x 1   1 x 1
