@@ -11,6 +11,8 @@ for t = T-1:-1:1
     beta(:, t) = A*(beta(:, t+1).*E(:, Y(t+1))); % iterate
     % k x 1      k x 1       1 x 1
     beta(:, t) = beta(:, t)/C(t+1); % renormalise
+%      assert(isequal( beta(:,t),1.0));
+    1;
 end
 
 end

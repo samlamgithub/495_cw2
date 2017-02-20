@@ -35,10 +35,13 @@ for n = 1:N
                          p = p * E(k, r);
                     end
                 end
-                E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) * C(n, t);              
+                E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) / C(n, t);              
             end
         end
         sums(n,t) = sum(sum(E3(n, t-1, :, :)));
+%         sums(n,t)
+        er=0.01;
+        assert(abs(sums(n,t)-1.00)<er);
     end
 %     E3(n,:,:,:) = E3(n,:,:,:)./p_total(n);
 end

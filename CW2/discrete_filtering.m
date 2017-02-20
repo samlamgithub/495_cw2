@@ -15,6 +15,10 @@ for t = 2:T
     C(t) = sum(alpha(:,t));
     % k x 1          k x 1   1 x 1
     alpha(:,t) = alpha(:,t)./C(t); % renormalise
+%     sum(alpha(:,t))
+    error = 0.01;
+    assert(abs( sum(alpha(:,t))-1.000)< error);
+    1;
 end
 
 end

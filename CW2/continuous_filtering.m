@@ -20,11 +20,13 @@ for t = 2:T
     for k = 1:K
        Emis_prob(k) = normpdf(Y(t), E.mu(k), E.sigma2(k));
     end
-    alpha(:, t) = Emis_prob.*(A*alpha(:,t-1)); % iterate
+    alpha(:, t) = Emis_prob.*(A'*alpha(:,t-1)); % iterate
                 %  k x 1
     C(t) = sum(alpha(:,t));
     % k x 1          k x 1   1 x 1
     alpha(:,t) = alpha(:,t)./C(t); % renormalise
+       error = 0.01;
+    assert(abs( sum(alpha(:,t))-1.000)< error);
 end
 
 end

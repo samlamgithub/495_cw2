@@ -29,10 +29,12 @@ for n = 1:N
         for j = 1:K
             for k = 1:K
                 p = normpdf(Y(n, t), E.mu(k), E.sigma2(k));
-                E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) * C(n, t);              
+                E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) / C(n, t);              
             end
         end
         sums(n,t) = sum(sum(E3(n, t-1, :, :)));
+        er=0.01;
+        assert(abs(sums(n,t)-1.00)<er);
     end
 %     E3(n,:,:,:) = E3(n,:,:,:)./p_total(n);
 end
