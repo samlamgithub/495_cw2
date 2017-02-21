@@ -17,7 +17,7 @@ for t = 2:T
     alpha(:,t) = alpha(:,t)./C(t); % renormalise
 %     sum(alpha(:,t))
     error = 0.01;
-    assert(abs( sum(alpha(:,t))-1.000)< error);
+    assert(abs(sum(alpha(:,t))-1.000)< error);
     1;
 end
 
