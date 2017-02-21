@@ -1,8 +1,8 @@
 \documentclass[12pt,twoside]{article}
 
-\newcommand{\reporttitle}{495 - Advanced Statistical Machine Learning and Pattern Recognition }
+\newcommand{\reporttitle}{495 - Advanced Statistical Machine Learning and Pattern Recognition Coursework 2}
 \newcommand{\reportauthor}{Jiahao Lin}
-\newcommand{\reporttype}{Coursework 1}
+\newcommand{\reporttype}{Coursework 2}
 \newcommand{\cid}{00837321}
 
 % include files that load packages and define macros
@@ -28,8 +28,81 @@ fdss
 fsds
 \end{enumerate}
 \section{Exercise II}
+\begin{enumerate}[(i)]
+\item
 
-
+\begin{align}
+p(\vec{Z}_n) = \prod_{k=1}^{K} \pi_k^{Z_{nk}}
+\end{align}
+\begin{align}
+\matdet{
+1 & 2 & 3\\
+3 & 4 & 5\\
+2 & 2 & 2
+}
+\end{align}
+\item If you do longer manipulations, please explain what you are doing: Try to avoid sequences of equations without text breaking up. Here is an example:
+We consider
+\begin{align}
+U_1 = [\colvec{1,1,0,0},\, \colvec{0,1,1,0},\, \colvec{0,0,1,1}]
+\subset\R^4, \quad 
+U_2 = [\colvec{-1,1,2,0},\, \colvec{0,1,0,0}]
+\subset\R^4\,.
+\end{align}
+==============\\
+N sequences, T observations per sequence, 5 states\\
+Estimate $\theta = \left\lbrace\vec{\pi}, A\right\rbrace$\\
+$\vec{\pi} = \left\lbrace \pi_1 ... \pi_5\right\rbrace$\\
+$for l = 1..N : D_l = \left\lbrace x_1^l ...  x_T^l \right\rbrace$\\
+$\vec{A} = [a_{ij}]$\\
+$x_t^l = \left\lbrace\colvec{1,0,0,0,0},\, \colvec{0,1,0,0,0},\, \colvec{0,0,1,0,0}, \colvec{0,0,0,1,0} \colvec{0,0,0,0,1} \right\rbrace$\\
+Maximise $p(D_1 ... D_N | \theta)$\\
+\begin{align}
+p(D_1 ... D_N | \theta) \\
+= \prod_{l=1}^{N} p(D_l|\theta) \\
+\end{align}
+Because
+\begin{align}
+p(D_1 | \theta) \\
+= p(x_1^l ... x_T^l | \theta) \\
+= p(x_1^l) \prod_{t=2}^{T} p(x_t^l |x_{t-1}^l) \\
+= \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}\\
+\end{align}
+so
+\begin{align}
+p(D_1 ... D_N | \theta) \\
+= \prod_{l=1}^{N} \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}\\
+\end{align}
+Take the log
+\begin{align}
+\ln(p(D_1 ... D_N | \theta)) \\
+= \sum_{l=1}^{N} \sum_{k=1}^5 x_{1k}^l \pi_k +  \sum_{l=1}^{N} \sum_{T=2}^T \sum_{j=1}^5 \sum_{k=1}^5 x_{t-1j}^l x_{tk}^l a_{jk}\\
+\end{align}
+Now we take
+\begin{align}
+N_k^l = \sum_{l=1}^N x_{1k}^l \\
+N_{jk} = \sum_{l=1}^N \sum_{T=2}^T x_{t-1j}^l x_{tk}^l  \\
+\end{align}
+so
+\begin{align}
+\ln(p(D_1 ... D_N | \theta)) \\
+= \sum_{l=1}^{N}N_k^l \pi_k +  \sum_{j=1}^5 \sum_{k=1}^5  N_{jk} a_{jk}\\
+\end{align}
+When maximising $\ln(p(D_1 ... D_N | \theta)) $, we put constraints:
+\begin{align}
+\sum_{k=1}^{K}\pi_k = 1\\
+\sum_{k=1}^{K} a_{jk} = 1\\
+\end{align}
+So
+\begin{align}
+\vec{L}(\vec{\pi}, \vec{A}) = \sum_{l=1}^{N}N_k^l \pi_k +  \sum_{j=1}^5 \sum_{k=1}^5  N_{jk} a_{jk} - \lambda (\sum_{k=1}^{K}\pi_k - 1)
+\end{align}
+$1$\\
+$1$\\
+$1$\\
+\item
+dwdw
+\end{enumerate}
 
 
 
