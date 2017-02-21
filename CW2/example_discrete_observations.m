@@ -30,6 +30,11 @@ for iter = 1:1000
   [bj, pi_e, A_e] = EM_HMM_discrete_M(N, T, size(pi, 1), size(E, 2), E1, E3, Y);
   E_e(2, 1:5) = bj;
   E_e(2,6) = 1-sum(bj);
+  for k = 1:K
+       er=0.01;
+        assert(abs(sum(E_e(k,:))-1.00)<er);
+  end
+  
   
   pi_e = reshape(pi_e, 2, 1);
 %   A_e
