@@ -8,7 +8,7 @@ T = size(Y, 2);
 C = zeros(T, 1);
 alpha = zeros(K, T);
 for k = 1:K
-    alpha(k, 1) = pi(k)* normpdf(Y(1),E.mu(k), E.sigma2(k)); % init alpha z1
+    alpha(k, 1) = pi(k)* normpdf(Y(1),E.mu(k), sqrt(E.sigma2(k))); % init alpha z1
 end
 
 C(1) = sum(alpha(:,1));
@@ -18,7 +18,7 @@ for t = 2:T
     %   k x 1       k x 1         k x k,  k x 1
     Emis_prob = zeros(K,1);
     for k = 1:K
-       Emis_prob(k) = normpdf(Y(t), E.mu(k), E.sigma2(k));
+       Emis_prob(k) = normpdf(Y(t), E.mu(k), sqrt(E.sigma2(k)));
     end
     alpha(:, t) = Emis_prob.*(A'*alpha(:,t-1)); % iterate
                 %  k x 1

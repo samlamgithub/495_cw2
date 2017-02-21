@@ -28,7 +28,7 @@ for n = 1:N
     for t = 2:T
         for j = 1:K
             for k = 1:K
-                p = normpdf(Y(n, t), E.mu(k), E.sigma2(k));
+                p = normpdf(Y(n, t), E.mu(k), sqrt(E.sigma2(k)));
                 E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) / C(n, t);              
             end
         end

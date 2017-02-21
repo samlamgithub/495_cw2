@@ -7,7 +7,7 @@ beta(:, T) = ones(K, 1); % init beta zT
 for t = T-1:-1:1
     Emis_prob = zeros(K,1);
     for k = 1:K
-       Emis_prob(k) = normpdf(Y(t+1), E.mu(k), E.sigma2(k));
+       Emis_prob(k) = normpdf(Y(t+1), E.mu(k), sqrt(E.sigma2(k)));
     end
     % K x 1     k x k   k x 1     k  x 1
     beta(:, t) = A*(beta(:, t+1).*Emis_prob); % iterate
