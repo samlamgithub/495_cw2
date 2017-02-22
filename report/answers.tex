@@ -43,45 +43,45 @@ $\vec{A} = [a_{ij}]$\\
 0 & 0 & a_{33} & a_{34} & a_{34}\\
 0 & 0 & 0 & a_{44} & a_{45}\\
 0 & 0 & 0 & 0 & a_{55}\\
-}
-x_t^l = \left\lbrace\colvec{1,0,0,0,0},\, \colvec{0,1,0,0,0},\, \colvec{0,0,1,0,0}, \colvec{0,0,0,1,0} \colvec{0,0,0,0,1} \right\rbrace\\
+} \\
+x_t^l = \left\lbrace\colvec{1,0,0,0,0},\, \colvec{0,1,0,0,0},\, \colvec{0,0,1,0,0}, \colvec{0,0,0,1,0} \colvec{0,0,0,0,1} \right\rbrace
 \end{align}
 Maximise $p(D_1 ... D_N | \theta)$\\
 \begin{align}
 p(D_1 ... D_N | \theta) \\
-= \prod_{l=1}^{N} p(D_l|\theta) \\
+= \prod_{l=1}^{N} p(D_l|\theta) 
 \end{align}
 Because
 \begin{align}
 p(D_1 | \theta) \\
 = p(x_1^l ... x_T^l | \theta) \\
 = p(x_1^l) \prod_{t=2}^{T} p(x_t^l |x_{t-1}^l) \\
-= \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}\\
+= \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}
 \end{align}
 so
 \begin{align}
 p(D_1 ... D_N | \theta) \\
-= \prod_{l=1}^{N} \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}\\
+= \prod_{l=1}^{N} \prod_{k=1}^5 \pi_k^{x_{1k}^l} \prod_{T=2}^T \prod_{j=1}^5 \prod_{k=1}^5 a_{jk}^{x_{t-1j}^l x_{tk}^l}
 \end{align}
 Take the log
 \begin{align}
 \ln(p(D_1 ... D_N | \theta)) \\
-= \sum_{l=1}^{N} \sum_{k=1}^5 x_{1k}^l \ln(\pi_k) +  \sum_{l=1}^{N} \sum_{T=2}^T \sum_{j=1}^5 \sum_{k=1}^5 x_{t-1j}^l x_{tk}^l \ln(a_{jk})\\
+= \sum_{l=1}^{N} \sum_{k=1}^5 x_{1k}^l \ln(\pi_k) +  \sum_{l=1}^{N} \sum_{T=2}^T \sum_{j=1}^5 \sum_{k=1}^5 x_{t-1j}^l x_{tk}^l \ln(a_{jk})
 \end{align}
 Now we take
 \begin{align}
 N_k^l = \sum_{l=1}^N x_{1k}^l \\
-N_{jk} = \sum_{l=1}^N \sum_{T=2}^T x_{t-1j}^l x_{tk}^l  \\
+N_{jk} = \sum_{l=1}^N \sum_{T=2}^T x_{t-1j}^l x_{tk}^l  
 \end{align}
 so
 \begin{align}
 \ln(p(D_1 ... D_N | \theta)) \\
-= \sum_{l=1}^{N}N_k^l \ln (\pi_k) +  \sum_{j=1}^5 \sum_{k=1}^5  N_{jk} \ln( a_{jk} )\\
+= \sum_{l=1}^{N}N_k^l \ln (\pi_k) +  \sum_{j=1}^5 \sum_{k=1}^5  N_{jk} \ln( a_{jk} )
 \end{align}
 When maximising $\ln(p(D_1 ... D_N | \theta)) $, we put constraints:
 \begin{align}
 \sum_{k=1}^{K}\pi_k = 1\\
-\sum_{k=1}^{K} a_{jk} = 1\\
+\sum_{k=1}^{K} a_{jk} = 1
 \end{align}
 So
 \begin{align}
@@ -97,7 +97,7 @@ Maximise $\vec{L}(\vec{\pi}, \vec{A})$:
 \pi_k = \frac{N_k^l}{\sum_{k=1}^{K} N_k^l} \\
 \frac{\partial \vec{L}(\vec{\pi}, \vec{A})}{\partial a_{jk}} = \frac{N_{jk} }{a_{jk}} - \gamma \\
 \gamma =  \sum_{k=1}^{K} N_{jk} \\
-a_{jk} = \frac{N_{jk}}{\sum_{k=1}^{K} N_{jk}} \\
+a_{jk} = \frac{N_{jk}}{\sum_{k=1}^{K} N_{jk}} 
 \end{align}
 Given our matrix $\vec{A}$, we know that:
 \begin{align}
@@ -124,19 +124,19 @@ p(z_{1k}^l = 1) = \pi_k \\
 \vec{A} = [a_{ij}] \\
 p(x_t^l| z_t^l) = \prod_{j=1}^5 \prod_{k=1}^K b_{kj} ^ {x_{t-1j}^l x_{tk}^l} \\
 Estimate\quad \theta = \left\lbrace\vec{\pi}, A,\vec{B} \right\rbrace\\
-for\quad l = 1..N : D_l = \left\lbrace x_1^l ...  x_T^l \right\rbrace \\
+for\quad l = 1..N : D_l = \left\lbrace x_1^l ...  x_T^l \right\rbrace 
 \end{align}
 Maximise $p(D_1 ... D_N, Z_1 ... Z_N | \theta)$\\
 \begin{align}
 x_t^l = \left\lbrace\colvec{1,0,0,0,0},\, \colvec{0,1,0,0,0},\, \colvec{0,0,1,0,0}, \colvec{0,0,0,1,0} \colvec{0,0,0,0,1} \right\rbrace \\
 p(D_1 ... D_N, Z_1 ... Z_N | \theta) = \prod_{l=1}^{N}  p(x_1^l ... x_T^l, z_1^l ... z_T^l | \theta) \\
 = \prod_{l=1}^{N} \prod_{t=1}^{T}  p(x_t^l |z_t^l) p(z_1^l) \prod_{t=2}^{T} p(z_t^l |z_{t-1}^l) \\
-= \prod_{l=1}^{N} \prod_{t=1}^{T} \prod_{j=1}^5 \prod_{k=1}^K b_{kj} ^ {x_{tj}^l z_{tk}^l}    \prod_{k=1}^K \pi_k^{z_{1k}^l} \prod_{t=2}^{T} \prod_{j=1}^K \prod_{k=1}^K a_{jk}^{z_{t-1j}^l z_{tk}^l}\\
+= \prod_{l=1}^{N} \prod_{t=1}^{T} \prod_{j=1}^5 \prod_{k=1}^K b_{kj} ^ {x_{tj}^l z_{tk}^l}    \prod_{k=1}^K \pi_k^{z_{1k}^l} \prod_{t=2}^{T} \prod_{j=1}^K \prod_{k=1}^K a_{jk}^{z_{t-1j}^l z_{tk}^l}
 \end{align}
 Take the log of this posterior
 \begin{align}
 \ln (p(D_1 ... D_N ,  Z_1 ... Z_N | \theta)) \\
-= \sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 \sum_{k=1}^K x_{tj}^l z_{tk}^l \ln (b_{kj})  +\sum_{l=1}^{N} \sum_{k=1}^K z_{1k}^l \ln (\pi_k) + \sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{j=1}^K \sum_{k=1}^K z_{t-1j}^l z_{tk}^l \ln (a_{jk}) \\
+= \sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 \sum_{k=1}^K x_{tj}^l z_{tk}^l \ln (b_{kj})  +\sum_{l=1}^{N} \sum_{k=1}^K z_{1k}^l \ln (\pi_k) + \sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{j=1}^K \sum_{k=1}^K z_{t-1j}^l z_{tk}^l \ln (a_{jk}) 
 \end{align}
 Take expectation with respect to posterior
 \begin{align}
