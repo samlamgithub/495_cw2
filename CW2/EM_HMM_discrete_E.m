@@ -6,10 +6,10 @@ betas = zeros(N, T, K);
 C = zeros(N, T);
 
 for n = 1:N
-    [an, cn] = discrete_filtering(pi, A, E, Y(n, :));
+    [an, cn] = discrete_filtering(T, K, pi, A, E, Y(n, :));
 	alphas(n, :, :) = an';
     C(n, :) = cn';
-	betas(n, :, :) = discrete_smoothing(pi, A, E, Y(n, :), C(n, :)')';
+	betas(n, :, :) = discrete_smoothing(T, K, A, E, Y(n, :), C(n, :)')';
 end
 
 E1 = alphas.*betas;
@@ -23,9 +23,7 @@ for n = 1:N
             for k = 1:K
                 p = 1;
                 for r = 1:NumObsers
-                    if Y(n, t) == r
-                         p = p * E(k, r);
-                    end
+                   p = p * power(E(k, r), Y(n, t) == r);
                 end
                 E3(n, t-1, j, k) = alphas(n, t-1, j) * p * A(j, k) * betas(n,t,k) / C(n, t);              
             end

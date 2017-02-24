@@ -1,10 +1,6 @@
-function [ alpha, C ] = continuous_filtering(pi, A, E, Y)
-%        K x T  T x 1                     k x 1, k x k, k x 2, 1 x T
+function [ alpha, C ] = continuous_filtering(T, K, pi, A, E, Y)
+%       K x T  T x 1                      k x 1, k x k, k x 2, 1 x T
 
-% p(x_t|z_t) = product k=1 to 3: normal(x_t| mu(k), sigma(k)) ^ z_tk
-% normpdf(X,mu,sigma)
-K = size(pi, 1);
-T = size(Y, 2);
 C = zeros(T, 1);
 alpha = zeros(K, T);
 for k = 1:K

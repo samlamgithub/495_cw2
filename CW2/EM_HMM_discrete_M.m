@@ -1,5 +1,5 @@
 function [ E_e, pi, a ] = EM_HMM_discrete_M(N, T, K, NumObsers, E1, E3, Y )
-  %    K x NumObsers   , k x 1, k x K        /    N x T x K, N x T-1 x K x K, N x T
+%    K x NumObsers, k x 1, k x K        /    N x T x K, N x T-1 x K x K, N x T
   
   E_e = zeros(K, NumObsers); % New emission probabilities
   for k = 1:K

@@ -1,4 +1,4 @@
-function [ S_e ] = EM_HMM_continuous_viterbi( N, T, K, pi_e, A_e, E_e , Y)
+function [ S_e ] = EM_HMM_continuous_viterbi(N, T, K, pi_e, A_e, E_e , Y)
 %         N x T                         K x 1, K x K, K x 2, N x T
 
 S_e = zeros(N, T);

@@ -1,7 +1,6 @@
-function [ beta ] = continuous_smoothing(pi, A, E, Y, C)
+function [ beta ] = continuous_smoothing(T, K, A, E, Y, C)
 %         K x T                    k x 1, k x k, k x 2, 1 x T, T x 1
-K = size(pi, 1);
-T = size(Y, 2);
+
 beta = zeros(K, T);
 beta(:, T) = ones(K, 1); % init beta zT
 for t = T-1:-1:1

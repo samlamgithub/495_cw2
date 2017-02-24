@@ -6,10 +6,10 @@ betas = zeros(N, T, K);
 C = zeros(N, T);
 
 for n = 1:N
-    [an, cn] = continuous_filtering(pi, A, E, Y(n, :));
+    [an, cn] = continuous_filtering(T, K, pi, A, E, Y(n, :));
 	alphas(n, :, :) = an';
     C(n, :) = cn';
-	betas(n, :, :) = continuous_smoothing(pi, A, E, Y(n, :), cn)';
+	betas(n, :, :) = continuous_smoothing(T, K, A, E, Y(n, :), cn)';
 end
 
 % N x T x K  

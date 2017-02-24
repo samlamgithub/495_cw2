@@ -30,14 +30,13 @@ IterationNum = 1000;
 
 for iter = 1:IterationNum
   [E1, E3, sums] =  EM_HMM_discrete_E(N, T, K, NumObsers, pi_e, A_e, E_e, Y); % Expectation step for discrete HMM
-  % Maximization step for discrete HMM
-  [E_e, pi_e, A_e] = EM_HMM_discrete_M(N, T, K, NumObsers, E1, E3, Y);
   for k = 1:K
        er=0.01;
        % checking row sum of emission probability matrix is 1
        assert(abs(sum(E_e(k,:))-1.00)<er);
   end
-
+  % Maximization step for discrete HMM
+  [E_e, pi_e, A_e] = EM_HMM_discrete_M(N, T, K, NumObsers, E1, E3, Y);
   pi_e = reshape(pi_e, 2, 1);  
 end
 
@@ -46,6 +45,6 @@ A_e
 E_e
 
 % Run viterbi decoding for dicrete HMM
-S_e = EM_HMM_discrete_viterbi(N, T, K, NumObsers, pi_e, A_e, E_e, Y);
+S_e = EM_HMM_discrete_viterbi(N, T, K, pi_e, A_e, E_e, Y);
 % Output accuracy rate of decoding
 1 - (sum(sum(abs(S_e-S)))/(N*T))
