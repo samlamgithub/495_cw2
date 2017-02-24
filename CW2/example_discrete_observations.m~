@@ -41,9 +41,9 @@ for iter = 1:IterationNum
   pi_e = reshape(pi_e, 2, 1);  
 end
 
-pi_e
-A_e
-E_e
+% pi_e
+% A_e
+% E_e
 
 % Run viterbi decoding for dicrete HMM
 S_e = EM_HMM_discrete_viterbi(N, T, K, NumObsers, pi_e, A_e, E_e, Y);

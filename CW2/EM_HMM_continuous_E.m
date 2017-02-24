@@ -1,8 +1,5 @@
-function [ E1, E3, sums ] = EM_HMM_continuous_E(N, pi, A, E, Y)
-  %   N x T x K, N x T-1 x K x K, N x T-1     k x 1, k x k, k x 2, N x T
-  
-T = size(Y, 2); % num seq
-K = size(pi, 1); % num latent state
+function [ E1, E3, sums ] = EM_HMM_continuous_E(N, T, K, pi, A, E, Y)
+%   N x T x K, N x T-1 x K x K, N x T-1     k x 1, k x k, k x 2, N x T
 
 alphas = zeros(N, T, K);
 betas = zeros(N, T, K);
@@ -14,8 +11,6 @@ for n = 1:N
     C(n, :) = cn';
 	betas(n, :, :) = continuous_smoothing(pi, A, E, Y(n, :), cn)';
 end
-
-% p_total = sum(C, 2); % nx1
 
 % N x T x K  
 E1 = alphas.*betas;
@@ -34,5 +29,4 @@ for n = 1:N
         er=0.01;
        assert(abs(sums(n,t)-1.00)<er);
     end
-%     E3(n,:,:,:) = E3(n,:,:,:)./p_total(n);
 end

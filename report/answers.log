@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.26)  22 FEB 2017 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.24)  24 FEB 2017 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1442,7 +1442,7 @@ Package rerunfilecheck Info: File `answers.out' has not changed.
 Here is how much of TeX's memory you used:
  23087 strings out of 494353
  420993 string characters out of 6170043
- 495950 words of memory out of 5000000
+ 495952 words of memory out of 5000000
  25814 multiletter control sequences out of 15000+600000
  52420 words of font info for 105 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
@@ -1456,7 +1456,7 @@ ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 kpex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on answers.pdf (7 pages, 95789 bytes).
+Output written on answers.pdf (7 pages, 95899 bytes).
 PDF statistics:
  215 PDF objects out of 1000 (max. 8388607)
  182 compressed objects within 2 object streams

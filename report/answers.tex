@@ -144,20 +144,20 @@ E_{[z_{tk}^l]} [\ln (p(D, Z|\theta))] = \sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}
 \end{align}
 To maximise it we need to put constraints
 \begin{align}
-\sum_{k=1}^{5} b_{jk} = 1\\
+\sum_{j=1}^{5} b_{jk} = 1\\
 \sum_{k=1}^{5} \pi_k = 1\\
 \sum_{k=1}^{K} a_{jk} = 1
 \end{align}
 So
 \begin{align}
 \vec{L}(\vec{\pi}, \vec{A} , \vec{B}) =  \sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 \sum_{k=1}^K x_{tj}^l E[z_{tk}^l] \ln (b_{kj})  + \sum_{l=1}^{N} \sum_{k=1}^K E[z_{1k}^l] \ln (\pi_k) \\
-+ \sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{j=1}^K \sum_{k=1}^K E[z_{t-1j}^l  z_{tk}^l] \ln (a_{jk}) - \lambda (  \sum_{k=1}^{5} b_{jk} -1 ) - \gamma (\sum_{k=1}^{5} \pi_k - 1) - \mu (\sum_{k=1}^{K} a_{jk} - 1)
++ \sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{j=1}^K \sum_{k=1}^K E[z_{t-1j}^l  z_{tk}^l] \ln (a_{jk}) - \lambda (  \sum_{j=1}^{5} b_{jk} -1 ) - \gamma (\sum_{k=1}^{K} \pi_k - 1) - \mu (\sum_{k=1}^{K} a_{jk} - 1)
 \end{align}
 Maximise $\vec{L}(\vec{\pi},\vec{A},\vec{B})$:
 \begin{align}
-\frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  b_{jk}} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l]}{b_{jk}} - \lambda = 0 \\
-\lambda = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l]}{b_{jk}} \\
-b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^K E[z_{tk}^l]}\\
+\frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  b_{jk}} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l] x_{tj}^l}{b_{jk}} - \lambda = 0 \\
+\lambda = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l] x_{tj}^l}{b_{jk}} \\
+b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 E[z_{tr}^l] x_{tj}^l}\\
 \frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  \pi_k} = \frac{\sum_{l=1}^{N} \sum_{k=1}^K E[z_{1k}^l] }{\pi_k}- \gamma = 0\\ 
 \gamma = \frac{\sum_{l=1}^{N} \sum_{k=1}^K E[z_{1k}^l] }{\pi_k} \\
 \pi_k = \frac{\sum_{l=1}^{N} E[z_{1k}^l]}{\sum_{l=1}^{N} \sum_{r=1}^K E[z_{1r}^l]} \\
@@ -166,7 +166,7 @@ a_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=2}^{T} E[z_{t-1j}^l  z_{tk}^l]}{\sum_{l=1}
 \end{align}
 Answer is
 \begin{align}
-b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^K E[z_{tk}^l]}\\
+b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 E[z_{tr}^l] x_{tj}^l}\\
 \pi_k = \frac{\sum_{l=1}^{N} E[z_{1k}^l]}{\sum_{l=1}^{N} \sum_{r=1}^K E[z_{1r}^l]} \\
 a_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=2}^{T} E[z_{t-1j}^l  z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{r=1}^K E[z_{t-1j}^l  z_{tr}^l]}
 \end{align}

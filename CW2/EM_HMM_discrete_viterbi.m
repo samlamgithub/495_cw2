@@ -1,10 +1,7 @@
-function [ S_e ] = EM_HMM_discrete_viterbi( N, T, K, pi_e, A_e, E_e , Y)
+function [ S_e ] = EM_HMM_discrete_viterbi( N, T, K, NumObsers, pi_e, A_e, E_e , Y)
 %         N x T                         K x 1, K x K, K x NumObsers, N x T
 
-NumObsers = size(E_e, 2);
 S_e = zeros(N, T);
-% log2(x)
-%  [a, b] = max([3,4,5])
 
 logPi = log2(pi_e);
 logA = log2(A_e);

@@ -1,9 +1,5 @@
-function [ E1, E3, sums ] = EM_HMM_discrete_E(N, pi, A, E, Y)
-  %     N x T x K, N x T-1 x K x K, N x T-1
-  
-T = size(Y, 2); % num seq
-K = size(pi, 1); % num latent state
-NumObsers = size(E, 2);
+function [ E1, E3, sums ] = EM_HMM_discrete_E(N, T, K, NumObsers, pi, A, E, Y)
+%output size: N x T x K, N x T-1 x K x K, N x T-1
 
 alphas = zeros(N, T, K);
 betas = zeros(N, T, K);
@@ -16,12 +12,8 @@ for n = 1:N
 	betas(n, :, :) = discrete_smoothing(pi, A, E, Y(n, :), C(n, :)')';
 end
 
-% p_total = sum(C, 2); % nx1
-
-E1 = zeros(N,T,K);
-
-E1(:, :, :) = alphas(:, :, :).*betas(:, :, :);
-%     E1(n,:) = E1(n,:)./p_total(n);
+E1 = alphas.*betas;
+%  size E1 is (N,T,K)
 
 E3 = zeros(N, T-1, K, K);
 sums = zeros(N, T-1);
@@ -39,9 +31,7 @@ for n = 1:N
             end
         end
         sums(n,t) = sum(sum(E3(n, t-1, :, :)));
-%         sums(n,t)
         er=0.01;
         assert(abs(sums(n,t)-1.00)<er);
     end
-%     E3(n,:,:,:) = E3(n,:,:,:)./p_total(n);
 end

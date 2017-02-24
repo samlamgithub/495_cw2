@@ -15,34 +15,34 @@ E.mu    =[ .1  .5]; %%the means of each of the Gaussians
 E.sigma2=[ .4 .8]; %%the variances
 
 [ Y, S ] = HmmGenerateData(N, T, pi, A, E, 'normal'); 
-%%Y is the set of generated observations 
-%%S is the set of ground truth sequence of latent vectors 
+%%Y is the set of generated observations, size is 10 x 100
+%%S is the set of ground truth sequence of latent vectors
 
-%10 x 100
-
+%%%%%%%%%%%%%%% Use origin distribution data as initial data to run continuous HMM %%%%%%%%%%%%%%%
 pi_e = pi;
 A_e = A;
-% A_e = [0.2, 0.8;0.2,0.8];
-E_e = E;;
+E_e = E;
+
+%%%%%%%%%%%%%%% Use random distribution data as initial data to run continuous HMM %%%%%%%%%%%%%%%
 % pi_e = reshape([0.4, 0.6],2,1);
-% A_e = [0.3 0.7 ; 0.7 0.3 ];
+% A_e = [0.2, 0.8;0.2,0.8];
 % E_e.mu    =[ .2 , .9]; %%the means of each of the Gaussians
 % E_e.sigma2=[ .1 , .8]; %%the variances
 
-for iter = 1:1000
-  [E1, E3, sums] =  EM_HMM_continuous_E(N, pi_e, A_e, E_e, Y);
-%  sums
-  [mu, sigma2, pi_e, A_e] = EM_HMM_continuous_M(N, T, size(pi, 1), E1, E3, Y, E_e);
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Start HMM process %%%%%%%%%%%%%%%%%%%%%%%%%%
+K = size(A, 1);
+IterationNum = 1000;
+
+for iter = 1:IterationNum
+  % Expectation step for discrete HMM
+  [E1, E3, sums] =  EM_HMM_continuous_E(N, T, K, pi_e, A_e, E_e, Y);
+  % Maximization step for discrete HMM
+  [mu, sigma2, pi_e, A_e] = EM_HMM_continuous_M(N, T, K, E1, E3, Y, E_e);
    reshape(mu, 1, 2);
    reshape(sigma2, 1, 2);
    E_e.mu = mu;
    E_e.sigma2 = sigma2;
-  pi_e = reshape(pi_e, 2, 1);  
-%   A_e
-% pi_e
-% A_e
-% E_e.mu
-% E_e.sigma2
+   pi_e = reshape(pi_e, 2, 1);
 end
 
 pi_e
@@ -50,6 +50,8 @@ A_e
 E_e.mu
 E_e.sigma2
 
-K = size(A, 1);
+% Run viterbi decoding for dicrete HMM
 S_e = EM_HMM_continuous_viterbi(N, T, K, pi_e, A_e, E_e, Y);
-sum(sum(abs(S_e-S)))
+% Output accuracy rate of decoding
+1 - (sum(sum(abs(S_e-S)))/(N*T))
+
