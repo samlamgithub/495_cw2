@@ -29,7 +29,7 @@
 \verb|continuous_smoothing.m|: This is function for continuous obervations Smoothing step to calculate betas\\
 \verb|discrete_filtering.m|: This is function for discrete obervations Filtering step to calculate alphas and scaling factor\\
 \verb|discrete_smoothing.m|: This is function for discrete obervations Smoothing step to calculate betas\\
-To run either the discrete or continuous HMM algorithm, just change folder path to the directory containing these files and then click run in one of the following files:
+To run either the discrete or continuous HMM algorithm, just change folder path to the directory containing these files and then click run in one of the following files:\\
 \verb|example_continuous_observations.m|\\
 \verb|example_discrete_observations.m|\\
 To decide what data is used to initialise the algorithm, you can comment out one setting of parameters like $A_e, pi_e, E_e$, and uncomment the other set, this mean you can use the original data used to generate observations to initialise the algorithm or other manually set data.\\
@@ -166,9 +166,9 @@ So
 \end{align}
 Maximise $\vec{L}(\vec{\pi},\vec{A},\vec{B})$:
 \begin{align}
-\frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  b_{jk}} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l] x_{tj}^l}{b_{jk}} - \lambda = 0 \\
-\lambda = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} E[z_{tk}^l] x_{tj}^l}{b_{jk}} \\
-b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 E[z_{tr}^l] x_{tj}^l}\\
+\frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  b_{jk}} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{b_{jk}} - \lambda = 0 \\
+\lambda = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{b_{jk}} \\
+b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 x_{tj}^l E[z_{tr}^l]}\\
 \frac{\partial \vec{L}(\vec{\pi}, \vec{A}, \vec{B})}{\partial  \pi_k} = \frac{\sum_{l=1}^{N} \sum_{k=1}^K E[z_{1k}^l] }{\pi_k}- \gamma = 0\\ 
 \gamma = \frac{\sum_{l=1}^{N} \sum_{k=1}^K E[z_{1k}^l] }{\pi_k} \\
 \pi_k = \frac{\sum_{l=1}^{N} E[z_{1k}^l]}{\sum_{l=1}^{N} \sum_{r=1}^K E[z_{1r}^l]} \\
@@ -177,7 +177,7 @@ a_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=2}^{T} E[z_{t-1j}^l  z_{tk}^l]}{\sum_{l=1}
 \end{align}
 Answer is
 \begin{align}
-b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 E[z_{tr}^l] x_{tj}^l}\\
+b_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=1}^{T} x_{tj}^l E[z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=1}^{T} \sum_{j=1}^5 x_{tj}^l E[z_{tr}^l]}\\
 \pi_k = \frac{\sum_{l=1}^{N} E[z_{1k}^l]}{\sum_{l=1}^{N} \sum_{r=1}^K E[z_{1r}^l]} \\
 a_{jk} = \frac{\sum_{l=1}^{N} \sum_{t=2}^{T} E[z_{t-1j}^l  z_{tk}^l]}{\sum_{l=1}^{N} \sum_{t=2}^{T} \sum_{r=1}^K E[z_{t-1j}^l  z_{tr}^l]}
 \end{align}
