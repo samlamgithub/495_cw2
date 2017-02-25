@@ -29,7 +29,8 @@ NumObsers = size(E, 2);
 IterationNum = 1000;
 
 for iter = 1:IterationNum
-  [E1, E3, sums] =  EM_HMM_discrete_E(N, T, K, NumObsers, pi_e, A_e, E_e, Y); % Expectation step for discrete HMM
+  % Expectation step for discrete HMM
+  [E1, E3, sums] =  EM_HMM_discrete_E(N, T, K, NumObsers, pi_e, A_e, E_e, Y);
   for k = 1:K
        er=0.01;
        % checking row sum of emission probability matrix is 1
@@ -40,6 +41,7 @@ for iter = 1:IterationNum
   pi_e = reshape(pi_e, 2, 1);  
 end
 
+% Log result
 pi_e
 A_e
 E_e
