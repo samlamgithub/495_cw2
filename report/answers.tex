@@ -19,18 +19,29 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
 \section{Exercise I}
-\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
-\subsection{}
-fdss
-\subsection{}
-\begin{enumerate}[(ii)]
+\begin{enumerate}[(i)]
 \item
-fsds
+\verb|EM_HMM_continuous_E.m|: This is function for continuous obervations Expectation step\\
+\verb|EM_HMM_continuous_M.m|: This is function for continuous obervations Maximization step\\
+\verb|EM_HMM_discrete_E.m|: This is function for discrete obervations Expectation step\\
+\verb|EM_HMM_discrete_M.m|: This is function for discrete obervations Maximization step\\
+\verb|continuous_filtering.m|: This is function for continuous obervations Filtering step to calculate alphas and scaling factor\\
+\verb|continuous_smoothing.m|: This is function for continuous obervations Smoothing step to calculate betas\\
+\verb|discrete_filtering.m|: This is function for discrete obervations Filtering step to calculate alphas and scaling factor\\
+\verb|discrete_smoothing.m|: This is function for discrete obervations Smoothing step to calculate betas\\
+To run either the discrete or continuous HMM algorithm, just change folder path to the directory containing these files and then click run in one of the following files:
+\verb|example_continuous_observations.m|\\
+\verb|example_discrete_observations.m|\\
+To decide what data is used to initialise the algorithm, you can comment out one setting of parameters like $A_e, pi_e, E_e$, and uncomment the other set, this mean you can use the original data used to generate observations to initialise the algorithm or other manually set data.\\
+After the algorithm finish, the result will be logged into the command window.
+\item
+\verb|EM_HMM_discrete_viterbi.m|: This is the function for discrete vertibi algorithm\\
+\verb|EM_HMM_continuous_viterbi.m|: This is the function for continuous vertibi algorithm\\
+The vertibi algorithm will automatically be run after corresponding EM algorithm finish, the result accuracy will be logged after running.
 \end{enumerate}
 \section{Exercise II}
 \begin{enumerate}[(i)]
 \item
-
 N sequences, T observations per sequence, 5 states\\
 Estimate $\theta = \left\lbrace\vec{\pi}, A\right\rbrace$\\
 $\vec{\pi} = \left\lbrace \pi_1 ... \pi_5\right\rbrace$\\
